@@ -59,12 +59,40 @@ boolean IsEmpty (Isi_Tree P){
 }
 
 void PreOrder (Isi_Tree P){
+    int indeks = 1 ;
+    printf("%c ", P[indeks].info);
+    for (int i = 1; i < 10; i++)
+    {
+        if (P[indeks].ps_fs == nil && P[indeks].ps_nb == nil)
+        {
+            while (P[indeks].ps_nb == nil)
+            {
+                indeks = P[indeks].ps_pr;
+                if (indeks == 1)
+                {
+                    break;
+                }
+            }
+            indeks = P[indeks].ps_nb;
+            printf("=> %c ", P[indeks].info);
 
-    
+        }else{
+            if (P[indeks].ps_fs != nil){
+                printf("=> %c ",P[P[indeks].ps_fs].info );
+                indeks = P[indeks].ps_fs;
+            }
+            else{
+                if (P[indeks].ps_nb != nil){
+                    printf("=> %c ", P[P[indeks].ps_nb].info);
+                    indeks = P[indeks].ps_nb;
+                }
+            }
+        }
+    }
 }
 
 void InOrder(Isi_Tree P) {
-    int current = 1, fsr; // Asumsi node 1 adalah root
+    int current = 1, fsr; 
     boolean firstroot = false, dontprint = false;
     while (firstroot == false){
         if (P[current].ps_fs != nil){
@@ -261,3 +289,12 @@ int HitungDepth(Isi_Tree P, address node) {
     }
     return max + 1;
 }
+
+int Max (infotype Data1, infotype Data2){
+    if (Data1 > Data2){
+        return Data1;
+    } else {
+        return Data2;
+    }
+}
+
